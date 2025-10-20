@@ -161,7 +161,7 @@ type Routes struct {
 	AccessControlPolicies *mux.Router // 'api/v4/access_control_policies'
 	AccessControlPolicy   *mux.Router // 'api/v4/access_control_policies/{policy_id:[A-Za-z0-9]+}'
 
-	ContentFlagging *mux.Router // 'api/v4/content_flagging'
+	// ContentFlagging *mux.Router // 'api/v4/content_flagging'  // Disabled due to ContentFlagging removal
 }
 
 type API struct {
@@ -309,7 +309,7 @@ func Init(srv *app.Server) (*API, error) {
 	api.BaseRoutes.AccessControlPolicies = api.BaseRoutes.APIRoot.PathPrefix("/access_control_policies").Subrouter()
 	api.BaseRoutes.AccessControlPolicy = api.BaseRoutes.APIRoot.PathPrefix("/access_control_policies/{policy_id:[A-Za-z0-9]+}").Subrouter()
 
-	api.BaseRoutes.ContentFlagging = api.BaseRoutes.APIRoot.PathPrefix("/content_flagging").Subrouter()
+	// api.BaseRoutes.ContentFlagging = api.BaseRoutes.APIRoot.PathPrefix("/content_flagging").Subrouter()  // Disabled due to ContentFlagging removal
 
 	api.InitUser()
 	api.InitBot()
@@ -363,7 +363,7 @@ func Init(srv *app.Server) (*API, error) {
 	api.InitCustomProfileAttributes()
 	api.InitAuditLogging()
 	api.InitAccessControlPolicy()
-	api.InitContentFlagging()
+	// api.InitContentFlagging()  // Disabled due to ContentFlagging removal
 
 	// If we allow testing then listen for manual testing URL hits
 	if *srv.Config().ServiceSettings.EnableTesting {

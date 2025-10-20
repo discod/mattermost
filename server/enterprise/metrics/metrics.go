@@ -521,7 +521,7 @@ func New(ps *platform.PlatformService, driver, dataSource string) *MetricsInterf
 		model.ClusterEventInvalidateCacheForLastPostTime,
 		model.ClusterEventInvalidateCacheForPostsUsage,
 		model.ClusterEventInvalidateCacheForTeams,
-		model.ClusterEventInvalidateCacheForContentFlagging,
+		// model.ClusterEventInvalidateCacheForContentFlagging,  // Disabled due to ContentFlagging removal
 		model.ClusterEventClearSessionCacheForAllUsers,
 		model.ClusterEventInstallPlugin,
 		model.ClusterEventRemovePlugin,
