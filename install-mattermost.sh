@@ -168,10 +168,23 @@ fi
 
 log_info "Webapp build completed successfully"
 
-# Step 10: Create directories and set up config
-log_info "Setting up directories and configuration..."
+# Step 10: Deploy webapp files
+log_info "Deploying webapp files to client directory..."
+rm -rf $INSTALL_DIR/client
+mkdir -p $INSTALL_DIR/client
+cp -r $INSTALL_DIR/webapp/channels/dist/* $INSTALL_DIR/client/
+
+if [ ! -f "$INSTALL_DIR/client/root.html" ]; then
+    log_error "Webapp deployment failed - root.html not found"
+    exit 1
+fi
+
+log_info "Webapp deployed successfully"
+
+# Step 11: Create additional directories and set up config
+log_info "Setting up additional directories and configuration..."
 cd $INSTALL_DIR
-mkdir -p data logs config client/plugins
+mkdir -p data logs config plugins
 
 # Copy default config
 cp $INSTALL_DIR/server/build/config/config.json $INSTALL_DIR/config/
