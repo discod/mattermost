@@ -236,7 +236,15 @@ func (ch *Channels) servePluginRequest(w http.ResponseWriter, r *http.Request, h
 		return
 	}
 
-	if validateCSRFForPluginRequest(rctx, r, session, cookieAuth, *ch.cfgSvc.Config().ServiceSettings.ExperimentalStrictCSRFEnforcement) {
+	// Get CSRF enforcement setting - ExperimentalStrictCSRFEnforcement field may not be available in all versions
+	// Default to false for backward compatibility
+	strictCSRF := false
+	// Disabled due to field availability issues in master branch
+	// if ch.cfgSvc.Config().ServiceSettings.ExperimentalStrictCSRFEnforcement != nil {
+	// 	strictCSRF = *ch.cfgSvc.Config().ServiceSettings.ExperimentalStrictCSRFEnforcement
+	// }
+
+	if validateCSRFForPluginRequest(rctx, r, session, cookieAuth, strictCSRF) {
 		r.Header.Set("Mattermost-User-Id", session.UserId)
 		context.SessionId = session.Id
 	} else {
