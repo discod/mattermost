@@ -31,7 +31,7 @@ type RetryLayer struct {
 	CommandStore                    store.CommandStore
 	CommandWebhookStore             store.CommandWebhookStore
 	ComplianceStore                 store.ComplianceStore
-	ContentFlaggingStore            store.ContentFlaggingStore
+	// ContentFlaggingStore            store.ContentFlaggingStore  // Disabled
 	DesktopTokensStore              store.DesktopTokensStore
 	DraftStore                      store.DraftStore
 	EmojiStore                      store.EmojiStore
@@ -118,9 +118,9 @@ func (s *RetryLayer) Compliance() store.ComplianceStore {
 	return s.ComplianceStore
 }
 
-func (s *RetryLayer) ContentFlagging() store.ContentFlaggingStore {
-	return s.ContentFlaggingStore
-}
+// func (s *RetryLayer) ContentFlagging() store.ContentFlaggingStore {
+// 	return s.ContentFlaggingStore
+// }
 
 func (s *RetryLayer) DesktopTokens() store.DesktopTokensStore {
 	return s.DesktopTokensStore
@@ -337,10 +337,10 @@ type RetryLayerComplianceStore struct {
 	Root *RetryLayer
 }
 
-type RetryLayerContentFlaggingStore struct {
-	store.ContentFlaggingStore
-	Root *RetryLayer
-}
+// type RetryLayerContentFlaggingStore struct {
+// 	store.ContentFlaggingStore
+// 	Root *RetryLayer
+// }
 
 type RetryLayerDesktopTokensStore struct {
 	store.DesktopTokensStore
@@ -4168,53 +4168,53 @@ func (s *RetryLayerComplianceStore) Update(compliance *model.Compliance) (*model
 
 }
 
-func (s *RetryLayerContentFlaggingStore) ClearCaches() {
+// func (s *RetryLayerContentFlaggingStore) ClearCaches() {
 
-	s.ContentFlaggingStore.ClearCaches()
+// 	s.ContentFlaggingStore.ClearCaches()
 
-}
+// }
 
-func (s *RetryLayerContentFlaggingStore) GetReviewerSettings() (*model.ReviewerIDsSettings, error) {
+// func (s *RetryLayerContentFlaggingStore) GetReviewerSettings() (*model.ReviewerIDsSettings, error) {
 
-	tries := 0
-	for {
-		result, err := s.ContentFlaggingStore.GetReviewerSettings()
-		if err == nil {
-			return result, nil
-		}
-		if !isRepeatableError(err) {
-			return result, err
-		}
-		tries++
-		if tries >= 3 {
-			err = errors.Wrap(err, "giving up after 3 consecutive repeatable transaction failures")
-			return result, err
-		}
-		timepkg.Sleep(100 * timepkg.Millisecond)
-	}
+// 	tries := 0
+// 	for {
+// 		result, err := s.ContentFlaggingStore.GetReviewerSettings()
+// 		if err == nil {
+// 			return result, nil
+// 		}
+// 		if !isRepeatableError(err) {
+// 			return result, err
+// 		}
+// 		tries++
+// 		if tries >= 3 {
+// 			err = errors.Wrap(err, "giving up after 3 consecutive repeatable transaction failures")
+// 			return result, err
+// 		}
+// 		timepkg.Sleep(100 * timepkg.Millisecond)
+// 	}
 
-}
+// }
 
-func (s *RetryLayerContentFlaggingStore) SaveReviewerSettings(reviewerSettings model.ReviewerIDsSettings) error {
+// func (s *RetryLayerContentFlaggingStore) SaveReviewerSettings(reviewerSettings model.ReviewerIDsSettings) error {
 
-	tries := 0
-	for {
-		err := s.ContentFlaggingStore.SaveReviewerSettings(reviewerSettings)
-		if err == nil {
-			return nil
-		}
-		if !isRepeatableError(err) {
-			return err
-		}
-		tries++
-		if tries >= 3 {
-			err = errors.Wrap(err, "giving up after 3 consecutive repeatable transaction failures")
-			return err
-		}
-		timepkg.Sleep(100 * timepkg.Millisecond)
-	}
+// 	tries := 0
+// 	for {
+// 		err := s.ContentFlaggingStore.SaveReviewerSettings(reviewerSettings)
+// 		if err == nil {
+// 			return nil
+// 		}
+// 		if !isRepeatableError(err) {
+// 			return err
+// 		}
+// 		tries++
+// 		if tries >= 3 {
+// 			err = errors.Wrap(err, "giving up after 3 consecutive repeatable transaction failures")
+// 			return err
+// 		}
+// 		timepkg.Sleep(100 * timepkg.Millisecond)
+// 	}
 
-}
+// }
 
 func (s *RetryLayerDesktopTokensStore) Delete(token string) error {
 
@@ -15784,26 +15784,26 @@ func (s *RetryLayerUserStore) Search(rctx request.CTX, teamID string, term strin
 
 }
 
-func (s *RetryLayerUserStore) SearchCommonContentFlaggingReviewers(term string) ([]*model.User, error) {
+// func (s *RetryLayerUserStore) SearchCommonContentFlaggingReviewers(term string) ([]*model.User, error) {
 
-	tries := 0
-	for {
-		result, err := s.UserStore.SearchCommonContentFlaggingReviewers(term)
-		if err == nil {
-			return result, nil
-		}
-		if !isRepeatableError(err) {
-			return result, err
-		}
-		tries++
-		if tries >= 3 {
-			err = errors.Wrap(err, "giving up after 3 consecutive repeatable transaction failures")
-			return result, err
-		}
-		timepkg.Sleep(100 * timepkg.Millisecond)
-	}
+// 	tries := 0
+// 	for {
+// 		result, err := s.UserStore.SearchCommonContentFlaggingReviewers(term)
+// 		if err == nil {
+// 			return result, nil
+// 		}
+// 		if !isRepeatableError(err) {
+// 			return result, err
+// 		}
+// 		tries++
+// 		if tries >= 3 {
+// 			err = errors.Wrap(err, "giving up after 3 consecutive repeatable transaction failures")
+// 			return result, err
+// 		}
+// 		timepkg.Sleep(100 * timepkg.Millisecond)
+// 	}
 
-}
+// }
 
 func (s *RetryLayerUserStore) SearchInChannel(channelID string, term string, options *model.UserSearchOptions) ([]*model.User, error) {
 
@@ -15910,26 +15910,26 @@ func (s *RetryLayerUserStore) SearchNotInTeam(notInTeamID string, term string, o
 
 }
 
-func (s *RetryLayerUserStore) SearchTeamContentFlaggingReviewers(teamId string, term string) ([]*model.User, error) {
+// func (s *RetryLayerUserStore) SearchTeamContentFlaggingReviewers(teamId string, term string) ([]*model.User, error) {
 
-	tries := 0
-	for {
-		result, err := s.UserStore.SearchTeamContentFlaggingReviewers(teamId, term)
-		if err == nil {
-			return result, nil
-		}
-		if !isRepeatableError(err) {
-			return result, err
-		}
-		tries++
-		if tries >= 3 {
-			err = errors.Wrap(err, "giving up after 3 consecutive repeatable transaction failures")
-			return result, err
-		}
-		timepkg.Sleep(100 * timepkg.Millisecond)
-	}
+// 	tries := 0
+// 	for {
+// 		result, err := s.UserStore.SearchTeamContentFlaggingReviewers(teamId, term)
+// 		if err == nil {
+// 			return result, nil
+// 		}
+// 		if !isRepeatableError(err) {
+// 			return result, err
+// 		}
+// 		tries++
+// 		if tries >= 3 {
+// 			err = errors.Wrap(err, "giving up after 3 consecutive repeatable transaction failures")
+// 			return result, err
+// 		}
+// 		timepkg.Sleep(100 * timepkg.Millisecond)
+// 	}
 
-}
+// }
 
 func (s *RetryLayerUserStore) SearchWithoutTeam(term string, options *model.UserSearchOptions) ([]*model.User, error) {
 
@@ -17066,7 +17066,7 @@ func New(childStore store.Store) *RetryLayer {
 	newStore.CommandStore = &RetryLayerCommandStore{CommandStore: childStore.Command(), Root: &newStore}
 	newStore.CommandWebhookStore = &RetryLayerCommandWebhookStore{CommandWebhookStore: childStore.CommandWebhook(), Root: &newStore}
 	newStore.ComplianceStore = &RetryLayerComplianceStore{ComplianceStore: childStore.Compliance(), Root: &newStore}
-	newStore.ContentFlaggingStore = &RetryLayerContentFlaggingStore{ContentFlaggingStore: childStore.ContentFlagging(), Root: &newStore}
+	// newStore.ContentFlaggingStore = &RetryLayerContentFlaggingStore{ContentFlaggingStore: childStore.ContentFlagging(), Root: &newStore}
 	newStore.DesktopTokensStore = &RetryLayerDesktopTokensStore{DesktopTokensStore: childStore.DesktopTokens(), Root: &newStore}
 	newStore.DraftStore = &RetryLayerDraftStore{DraftStore: childStore.Draft(), Root: &newStore}
 	newStore.EmojiStore = &RetryLayerEmojiStore{EmojiStore: childStore.Emoji(), Root: &newStore}

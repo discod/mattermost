@@ -1734,35 +1734,35 @@ func (_m *UserStore) Search(rctx request.CTX, teamID string, term string, option
 	return r0, r1
 }
 
-// SearchCommonContentFlaggingReviewers provides a mock function with given fields: term
-func (_m *UserStore) SearchCommonContentFlaggingReviewers(term string) ([]*model.User, error) {
-	ret := _m.Called(term)
+// // SearchCommonContentFlaggingReviewers provides a mock function with given fields: term
+// func (_m *UserStore) SearchCommonContentFlaggingReviewers(term string) ([]*model.User, error) {
+// 	ret := _m.Called(term)
 
-	if len(ret) == 0 {
-		panic("no return value specified for SearchCommonContentFlaggingReviewers")
-	}
+// 	if len(ret) == 0 {
+// 		panic("no return value specified for SearchCommonContentFlaggingReviewers")
+// 	}
 
-	var r0 []*model.User
-	var r1 error
-	if rf, ok := ret.Get(0).(func(string) ([]*model.User, error)); ok {
-		return rf(term)
-	}
-	if rf, ok := ret.Get(0).(func(string) []*model.User); ok {
-		r0 = rf(term)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]*model.User)
-		}
-	}
+// 	var r0 []*model.User
+// 	var r1 error
+// 	if rf, ok := ret.Get(0).(func(string) ([]*model.User, error)); ok {
+// 		return rf(term)
+// 	}
+// 	if rf, ok := ret.Get(0).(func(string) []*model.User); ok {
+// 		r0 = rf(term)
+// 	} else {
+// 		if ret.Get(0) != nil {
+// 			r0 = ret.Get(0).([]*model.User)
+// 		}
+// 	}
 
-	if rf, ok := ret.Get(1).(func(string) error); ok {
-		r1 = rf(term)
-	} else {
-		r1 = ret.Error(1)
-	}
+// 	if rf, ok := ret.Get(1).(func(string) error); ok {
+// 		r1 = rf(term)
+// 	} else {
+// 		r1 = ret.Error(1)
+// 	}
 
-	return r0, r1
-}
+// 	return r0, r1
+// }
 
 // SearchInChannel provides a mock function with given fields: channelID, term, options
 func (_m *UserStore) SearchInChannel(channelID string, term string, options *model.UserSearchOptions) ([]*model.User, error) {
@@ -1914,35 +1914,35 @@ func (_m *UserStore) SearchNotInTeam(notInTeamID string, term string, options *m
 	return r0, r1
 }
 
-// SearchTeamContentFlaggingReviewers provides a mock function with given fields: teamId, term
-func (_m *UserStore) SearchTeamContentFlaggingReviewers(teamId string, term string) ([]*model.User, error) {
-	ret := _m.Called(teamId, term)
+// // SearchTeamContentFlaggingReviewers provides a mock function with given fields: teamId, term
+// func (_m *UserStore) SearchTeamContentFlaggingReviewers(teamId string, term string) ([]*model.User, error) {
+// 	ret := _m.Called(teamId, term)
 
-	if len(ret) == 0 {
-		panic("no return value specified for SearchTeamContentFlaggingReviewers")
-	}
+// 	if len(ret) == 0 {
+// 		panic("no return value specified for SearchTeamContentFlaggingReviewers")
+// 	}
 
-	var r0 []*model.User
-	var r1 error
-	if rf, ok := ret.Get(0).(func(string, string) ([]*model.User, error)); ok {
-		return rf(teamId, term)
-	}
-	if rf, ok := ret.Get(0).(func(string, string) []*model.User); ok {
-		r0 = rf(teamId, term)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]*model.User)
-		}
-	}
+// 	var r0 []*model.User
+// 	var r1 error
+// 	if rf, ok := ret.Get(0).(func(string, string) ([]*model.User, error)); ok {
+// 		return rf(teamId, term)
+// 	}
+// 	if rf, ok := ret.Get(0).(func(string, string) []*model.User); ok {
+// 		r0 = rf(teamId, term)
+// 	} else {
+// 		if ret.Get(0) != nil {
+// 			r0 = ret.Get(0).([]*model.User)
+// 		}
+// 	}
 
-	if rf, ok := ret.Get(1).(func(string, string) error); ok {
-		r1 = rf(teamId, term)
-	} else {
-		r1 = ret.Error(1)
-	}
+// 	if rf, ok := ret.Get(1).(func(string, string) error); ok {
+// 		r1 = rf(teamId, term)
+// 	} else {
+// 		r1 = ret.Error(1)
+// 	}
 
-	return r0, r1
-}
+// 	return r0, r1
+// }
 
 // SearchWithoutTeam provides a mock function with given fields: term, options
 func (_m *UserStore) SearchWithoutTeam(term string, options *model.UserSearchOptions) ([]*model.User, error) {

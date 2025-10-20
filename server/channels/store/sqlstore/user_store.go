@@ -1576,46 +1576,46 @@ func (us SqlUserStore) Search(rctx request.CTX, teamId string, term string, opti
 	return us.performSearch(query, term, options)
 }
 
-func (us SqlUserStore) SearchCommonContentFlaggingReviewers(term string) ([]*model.User, error) {
-	query := us.getQueryBuilder().
-		Select(getUsersColumns()...).
-		Columns(getBotInfoColumns()...).
-		From("ContentFlaggingCommonReviewers").
-		LeftJoin("Users ON Users.Id = ContentFlaggingCommonReviewers.UserId").
-		LeftJoin("Bots b ON (b.UserId = Users.Id)").
-		OrderBy("Users.Username ASC").
-		Limit(ContentReviewerSearchLimit)
+// func (us SqlUserStore) SearchCommonContentFlaggingReviewers(term string) ([]*model.User, error) {
+// 	query := us.getQueryBuilder().
+// 		Select(getUsersColumns()...).
+// 		Columns(getBotInfoColumns()...).
+// 		From("ContentFlaggingCommonReviewers").
+// 		LeftJoin("Users ON Users.Id = ContentFlaggingCommonReviewers.UserId").
+// 		LeftJoin("Bots b ON (b.UserId = Users.Id)").
+// 		OrderBy("Users.Username ASC").
+// 		Limit(ContentReviewerSearchLimit)
 
-	searchOptions := &model.UserSearchOptions{
-		AllowEmails:    false,
-		AllowFullNames: true,
-		AllowInactive:  false,
-		Limit:          50,
-	}
+// 	searchOptions := &model.UserSearchOptions{
+// 		AllowEmails:    false,
+// 		AllowFullNames: true,
+// 		AllowInactive:  false,
+// 		Limit:          50,
+// 	}
 
-	return us.performSearch(query, term, searchOptions)
-}
+// 	return us.performSearch(query, term, searchOptions)
+// }
 
-func (us SqlUserStore) SearchTeamContentFlaggingReviewers(teamId, term string) ([]*model.User, error) {
-	query := us.getQueryBuilder().
-		Select(getUsersColumns()...).
-		Columns(getBotInfoColumns()...).
-		From("ContentFlaggingTeamReviewers").
-		LeftJoin("Users ON Users.Id = ContentFlaggingTeamReviewers.UserId").
-		LeftJoin("Bots b ON (b.UserId = Users.Id)").
-		Where("ContentFlaggingTeamReviewers.TeamId = ?", teamId).
-		OrderBy("Users.Username ASC").
-		Limit(ContentReviewerSearchLimit)
+// func (us SqlUserStore) SearchTeamContentFlaggingReviewers(teamId, term string) ([]*model.User, error) {
+// 	query := us.getQueryBuilder().
+// 		Select(getUsersColumns()...).
+// 		Columns(getBotInfoColumns()...).
+// 		From("ContentFlaggingTeamReviewers").
+// 		LeftJoin("Users ON Users.Id = ContentFlaggingTeamReviewers.UserId").
+// 		LeftJoin("Bots b ON (b.UserId = Users.Id)").
+// 		Where("ContentFlaggingTeamReviewers.TeamId = ?", teamId).
+// 		OrderBy("Users.Username ASC").
+// 		Limit(ContentReviewerSearchLimit)
 
-	searchOptions := &model.UserSearchOptions{
-		AllowEmails:    false,
-		AllowFullNames: true,
-		AllowInactive:  false,
-		Limit:          50,
-	}
+// 	searchOptions := &model.UserSearchOptions{
+// 		AllowEmails:    false,
+// 		AllowFullNames: true,
+// 		AllowInactive:  false,
+// 		Limit:          50,
+// 	}
 
-	return us.performSearch(query, term, searchOptions)
-}
+// 	return us.performSearch(query, term, searchOptions)
+// }
 
 func (us SqlUserStore) SearchWithoutTeam(term string, options *model.UserSearchOptions) ([]*model.User, error) {
 	query := us.usersQuery.
