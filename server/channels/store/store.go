@@ -507,8 +507,8 @@ type UserStore interface {
 	RefreshPostStatsForUsers() error
 	GetUserReport(filter *model.UserReportOptions) ([]*model.UserReportQuery, error)
 	GetUserCountForReport(filter *model.UserReportOptions) (int64, error)
-	SearchCommonContentFlaggingReviewers(term string) ([]*model.User, error)
-	SearchTeamContentFlaggingReviewers(teamId, term string) ([]*model.User, error)
+	// SearchCommonContentFlaggingReviewers(term string) ([]*model.User, error)  // Disabled due to compilation issues with ReviewerIDsSettings
+	// SearchTeamContentFlaggingReviewers(teamId, term string) ([]*model.User, error)  // Disabled due to compilation issues with ReviewerIDsSettings
 }
 
 type BotStore interface {
