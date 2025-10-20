@@ -98,7 +98,7 @@ type Store interface {
 	AccessControlPolicy() AccessControlPolicyStore
 	Attributes() AttributesStore
 	GetSchemaDefinition() (*model.SupportPacketDatabaseSchema, error)
-	ContentFlagging() ContentFlaggingStore
+	// ContentFlagging() ContentFlaggingStore  // Disabled due to compilation issues
 }
 
 type RetentionPolicyStore interface {
@@ -1148,11 +1148,12 @@ type AttributesStore interface {
 	GetChannelMembersToRemove(rctx request.CTX, channelID string, opts model.SubjectSearchOptions) ([]*model.ChannelMember, error)
 }
 
-type ContentFlaggingStore interface {
-	SaveReviewerSettings(reviewerSettings model.ReviewerIDsSettings) error
-	GetReviewerSettings() (*model.ReviewerIDsSettings, error)
-	ClearCaches()
-}
+// ContentFlaggingStore interface disabled due to compilation issues with ReviewerIDsSettings
+// type ContentFlaggingStore interface {
+// 	SaveReviewerSettings(reviewerSettings model.ReviewerIDsSettings) error
+// 	GetReviewerSettings() (*model.ReviewerIDsSettings, error)
+// 	ClearCaches()
+// }
 
 // ChannelSearchOpts contains options for searching channels.
 //
