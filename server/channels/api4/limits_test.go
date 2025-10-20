@@ -29,8 +29,8 @@ func TestGetServerLimits(t *testing.T) {
 
 		// Should have full access to all limits data
 		require.Greater(t, serverLimits.ActiveUserCount, int64(0))
-		require.Equal(t, int64(200), serverLimits.MaxUsersLimit)
-		require.Equal(t, int64(250), serverLimits.MaxUsersHardLimit)
+		require.Equal(t, int64(2000), serverLimits.MaxUsersLimit)
+		require.Equal(t, int64(2500), serverLimits.MaxUsersHardLimit)
 		require.Equal(t, int64(0), serverLimits.PostHistoryLimit)
 		require.Equal(t, int64(0), serverLimits.LastAccessiblePostTime)
 	})
@@ -42,7 +42,7 @@ func TestGetServerLimits(t *testing.T) {
 		// Set up licensed server with user limits
 		userLimit := 100
 		extraUsers := 10
-		postHistoryLimit := int64(10000)
+		postHistoryLimit := int64(1000000000)
 		license := model.NewTestLicense("")
 		license.IsSeatCountEnforced = true
 		license.Features.Users = &userLimit
@@ -72,7 +72,7 @@ func TestGetServerLimits(t *testing.T) {
 
 		// Set up licensed server with post history limits
 		userLimit := 100
-		postHistoryLimit := int64(10000)
+		postHistoryLimit := int64(1000000000)
 		license := model.NewTestLicense("")
 		license.IsSeatCountEnforced = true
 		license.Features.Users = &userLimit
@@ -103,7 +103,7 @@ func TestGetServerLimits(t *testing.T) {
 
 		// Set up licensed server with post history limits
 		userLimit := 100
-		postHistoryLimit := int64(10000)
+		postHistoryLimit := int64(1000000000)
 		license := model.NewTestLicense("")
 		license.IsSeatCountEnforced = true
 		license.Features.Users = &userLimit
