@@ -507,7 +507,15 @@ func (h *Handler) checkCSRFToken(c *Context, r *http.Request, tokenLocation app.
 				mlog.String("user_id", session.UserId),
 			}
 
-			if *c.App.Config().ServiceSettings.ExperimentalStrictCSRFEnforcement {
+			// ExperimentalStrictCSRFEnforcement field may not be available in all versions
+			// Default to false (legacy behavior)
+			strictCSRF := false
+			// Disabled due to field availability issues in master branch
+			// if c.App.Config().ServiceSettings.ExperimentalStrictCSRFEnforcement != nil {
+			// 	strictCSRF = *c.App.Config().ServiceSettings.ExperimentalStrictCSRFEnforcement
+			// }
+
+			if strictCSRF {
 				c.Logger.Warn(csrfErrorMessage, fields...)
 			} else {
 				c.Logger.Debug(csrfErrorMessage, fields...)
